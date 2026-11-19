@@ -1,0 +1,20 @@
+{"id": "p1-001", "input": "지난 회의에서 요청한 자료가 메일로 왔는지 확인해줘", "expected": {"intent": "check_email", "time_ref": "지난 회의", "needs_approval": false, "needs_clarification": false}}
+{"id": "p1-002", "input": "오늘 온 메일 중에 박 대리가 보낸 거 있어?", "expected": {"intent": "check_email", "target": ["박 대리", "박대리"], "time_ref": "오늘", "needs_approval": false, "needs_clarification": false}}
+{"id": "p1-003", "input": "거래처에 견적 요청하는 메일 초안 써줘", "expected": {"intent": "draft_email", "target": ["거래처"], "time_ref": null, "needs_approval": false, "needs_clarification": false}}
+{"id": "p1-004", "input": "김팀장님께 회의록 메일 보내줘", "expected": {"intent": "send_email", "target": ["김팀장"], "time_ref": null, "needs_approval": true, "needs_clarification": false}}
+{"id": "p1-005", "input": "받은편지함에 있는 광고 메일 다 지워줘", "expected": {"intent": "delete_email", "target": ["광고"], "needs_approval": true, "needs_clarification": false}}
+{"id": "p1-006", "input": "서울 내일 날씨 검색해줘", "expected": {"intent": "web_search", "time_ref": "내일", "needs_approval": false, "needs_clarification": false}}
+{"id": "p1-007", "input": "파이썬 3.14 새 기능 좀 찾아봐", "expected": {"intent": "web_search", "time_ref": null, "needs_approval": false, "needs_clarification": false}}
+{"id": "p1-008", "input": "회사 인트라넷 공지사항 페이지에서 이번 주 일정 확인해줘", "expected": {"intent": "web_extract", "target": ["인트라넷", "공지사항"], "time_ref": "이번 주", "needs_approval": false, "needs_clarification": false}}
+{"id": "p1-009", "input": "테스트 쇼핑몰 사이트에서 무선 마우스 가격 알려줘", "expected": {"intent": "web_extract", "target": ["쇼핑몰", "마우스"], "time_ref": null, "needs_approval": false, "needs_clarification": false}}
+{"id": "p1-010", "input": "다음 주 화요일 오후 3시로 회의실 예약해줘", "expected": {"intent": "submit_form", "target": ["회의실"], "time_ref": "다음 주 화요일", "needs_approval": true, "needs_clarification": false}}
+{"id": "p1-011", "input": "개발자 세미나 참가 신청서 제출해줘", "expected": {"intent": "submit_form", "target": ["세미나", "신청서"], "time_ref": null, "needs_approval": true, "needs_clarification": false}}
+{"id": "p1-012", "input": "장바구니에 담아둔 프린터 토너 결제해줘", "expected": {"intent": "purchase", "target": ["토너"], "time_ref": null, "needs_approval": true, "needs_clarification": false}}
+{"id": "p1-013", "input": "지난주 회의에서 결정된 사항이 뭐였지?", "expected": {"intent": "recall_memory", "time_ref": "지난주", "needs_approval": false, "needs_clarification": false}}
+{"id": "p1-014", "input": "마케팅 회의에서 내가 맡은 할 일이 뭐였는지 알려줘", "expected": {"intent": "recall_memory", "target": ["마케팅"], "needs_approval": false, "needs_clarification": false}}
+{"id": "p1-015", "input": "금요일까지 보고서 초안 완성하기를 할 일로 등록해줘", "expected": {"intent": "create_todo", "target": ["보고서"], "time_ref": "금요일", "needs_approval": false, "needs_clarification": false}}
+{"id": "p1-016", "input": "내일 오전에 디자인팀에 연락하기 할 일에 추가해", "expected": {"intent": "create_todo", "target": ["디자인팀"], "time_ref": "내일 오전", "needs_approval": false, "needs_clarification": false}}
+{"id": "p1-017", "input": "그 메일 보내줘", "expected": {"intent": "send_email", "needs_approval": true, "needs_clarification": true}}
+{"id": "p1-018", "input": "이거 좀 처리해줘", "expected": {"intent": "unknown", "needs_approval": false, "needs_clarification": true}}
+{"id": "p1-019", "input": "노래 한 곡 불러줘", "expected": {"intent": "unknown", "needs_approval": false}}
+{"id": "p1-020", "input": "메일 하나 써줘", "expected": {"intent": "draft_email", "needs_approval": false, "needs_clarification": true}}

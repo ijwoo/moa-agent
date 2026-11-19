@@ -1,0 +1,20 @@
+{"id": "k-n1", "text": "수고 많아", "expect": "none", "holdout": true}
+{"id": "k-n2", "text": "오늘 날씨 좋다", "expect": "none", "holdout": true}
+{"id": "k-n3", "text": "카카오톡 메시지도 보낼 수 있어?", "expect": "none", "holdout": true, "reply_must_contain_any": ["못", "않", "아직", "없"], "reply_must_not_contain": ["보낼 수 있어요", "가능합니다"]}
+{"id": "k-n4", "text": "구글 캘린더 일정 확인돼?", "expect": "none", "holdout": true, "reply_must_contain_any": ["못", "않", "아직", "없"], "reply_must_not_contain": ["확인 가능", "가능합니다"]}
+{"id": "k-n5", "text": "그럼 그건 됐어", "expect": "none", "holdout": true, "history": [["user", "지메일도 볼 수 있어?"], ["assistant", "지메일 같은 실제 메일 서비스는 아직 다루지 못해요. 맥의 테스트 메일 사이트만 볼 수 있어요."]], "reply_must_not_promise": true}
+{"id": "k-r1", "text": "견적서 누가 보내기로 했지?", "expect": "route_claude", "holdout": true, "context": "## 영업 회의 (2026-11-09)\n요약: 견적 일정 논의(가상)\n[00:05] 남팀장: 견적서는 류대리가 수요일까지 보내기로 했습니다.\n[00:21] 류대리: 할인율은 아직 정하지 못했습니다. 다음 회의에서 다시 보죠.", "contacts": {"남팀장": "test-j@mail.test", "류대리": "test-k@mail.test"}}
+{"id": "k-r2", "text": "할인율 정해졌어?", "expect": "route_claude", "holdout": true, "context": "## 영업 회의 (2026-11-09)\n요약: 견적 일정 논의(가상)\n[00:05] 남팀장: 견적서는 류대리가 수요일까지 보내기로 했습니다.\n[00:21] 류대리: 할인율은 아직 정하지 못했습니다. 다음 회의에서 다시 보죠."}
+{"id": "k-r3", "text": "영업 회의 요약해 줘", "expect": "route_claude", "holdout": true}
+{"id": "k-r4", "text": "남팀장이 무슨 말 했었어?", "expect": "route_claude", "holdout": true, "contacts": {"남팀장": "test-j@mail.test", "류대리": "test-k@mail.test"}}
+{"id": "k-t1", "text": "류대리에게 견적서 진행 상황 묻는 메일 초안 남겨 줘", "expect": "task", "holdout": true, "contacts": {"남팀장": "test-j@mail.test", "류대리": "test-k@mail.test"}, "context": "## 영업 회의 (2026-11-09)\n요약: 견적 일정 논의(가상)\n[00:05] 남팀장: 견적서는 류대리가 수요일까지 보내기로 했습니다.\n[00:21] 류대리: 할인율은 아직 정하지 못했습니다. 다음 회의에서 다시 보죠.", "expect_address": "test-k@mail.test"}
+{"id": "k-t2", "text": "test-q@mail.test로 회의 일정 안내 초안 저장해 줘", "expect": "task", "holdout": true, "expect_address": "test-q@mail.test"}
+{"id": "k-t3", "text": "보낸편지함에 견적 관련 메일 있는지 봐 줘", "expect": "task", "holdout": true}
+{"id": "k-t4", "text": "쇼핑몰에서 키보드 가격 알아봐 줘", "expect": "task", "holdout": true}
+{"id": "k-t5", "text": "응 그렇게 해 줘", "expect": "task", "holdout": true, "history": [["user", "남팀장한테 회의 감사 메일 초안 써 줄 수 있어?"], ["assistant", "네, 남팀장님께 보낼 감사 메일 초안을 작성할까요?"]], "contacts": {"남팀장": "test-j@mail.test", "류대리": "test-k@mail.test"}, "expect_address": "test-j@mail.test"}
+{"id": "k-t6", "text": "인트라넷 공지에 견적 양식 바뀐 거 있는지 찾아 줘", "expect": "task", "holdout": true}
+{"id": "k-a1", "text": "메일 좀 써 줘", "expect": "ask", "holdout": true, "contacts": {"남팀장": "test-j@mail.test", "류대리": "test-k@mail.test"}, "expect_choices": true}
+{"id": "k-a2", "text": "그 사람한테 다시 보내 줘", "expect": "ask", "holdout": true}
+{"id": "k-a3", "text": "변대리에게 견적 요청 초안 써 줘", "expect": "ask", "holdout": true, "contacts": {"남팀장": "test-j@mail.test", "류대리": "test-k@mail.test"}, "no_task_address": true}
+{"id": "k-a4", "text": "해 줄래?", "expect": "ask", "holdout": true, "history": [["user", "지메일도 볼 수 있어?"], ["assistant", "지메일 같은 실제 메일 서비스는 아직 다루지 못해요. 맥의 테스트 메일 사이트만 볼 수 있어요."]], "accept": ["none"], "reply_must_not_promise": true, "no_task": true}
+{"id": "k-a5", "text": "이사님께 보고 초안 남겨 줘", "expect": "ask", "holdout": true, "no_task_address": true}

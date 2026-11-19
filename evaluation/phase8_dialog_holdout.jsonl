@@ -1,0 +1,20 @@
+{"id": "h-n1", "text": "좋은 아침이야", "expect": "none", "holdout": true}
+{"id": "h-n2", "text": "오늘 하루도 고생 많았어", "expect": "none", "holdout": true}
+{"id": "h-n3", "text": "메일 작업도 해 줄 수 있어?", "expect": "none", "holdout": true}
+{"id": "h-n4", "text": "주말엔 쉬어도 돼", "expect": "none", "holdout": true, "context": "[합성 회의 발췌] 제품 회의(가상). 오팀장: 가격표 최종본을 금요일까지 공유하기로 했다. 한주임: 경쟁사 조사 담당. 결정: 베타 테스트는 2주간 진행한다."}
+{"id": "h-n5", "text": "회의라는 단어 영어로 뭐야?", "expect": "none", "holdout": true}
+{"id": "h-r1", "text": "베타 테스트 기간 얼마로 했지?", "expect": "route_claude", "holdout": true, "context": "[합성 회의 발췌] 제품 회의(가상). 오팀장: 가격표 최종본을 금요일까지 공유하기로 했다. 한주임: 경쟁사 조사 담당. 결정: 베타 테스트는 2주간 진행한다."}
+{"id": "h-r2", "text": "한주임이 담당한 게 뭐였더라", "expect": "route_claude", "holdout": true, "context": "[합성 회의 발췌] 제품 회의(가상). 오팀장: 가격표 최종본을 금요일까지 공유하기로 했다. 한주임: 경쟁사 조사 담당. 결정: 베타 테스트는 2주간 진행한다."}
+{"id": "h-r3", "text": "제품 회의 핵심만 세 줄로 정리해줘", "expect": "route_claude", "holdout": true, "context": "[합성 회의 발췌] 제품 회의(가상). 오팀장: 가격표 최종본을 금요일까지 공유하기로 했다. 한주임: 경쟁사 조사 담당. 결정: 베타 테스트는 2주간 진행한다."}
+{"id": "h-r4", "text": "오팀장이 언제까지 뭘 주기로 했어?", "expect": "route_claude", "holdout": true, "contacts": {"정과장": "test-d@mail.test", "한주임": "test-e@mail.test", "오팀장": "test-f@mail.test"}}
+{"id": "h-r5", "text": "회의에서 반대 의견 나온 거 있었어?", "expect": "route_claude", "holdout": true}
+{"id": "h-t1", "text": "임시 보관함에 저장된 초안 몇 개 있는지 봐줘", "expect": "task", "holdout": true}
+{"id": "h-t2", "text": "공지사항 첫 페이지 제목들 읽어줘", "expect": "task", "holdout": true}
+{"id": "h-t3", "text": "한주임한테 경쟁사 조사 진행 상황 묻는 메일 초안 저장해줘", "expect": "task", "holdout": true, "contacts": {"정과장": "test-d@mail.test", "한주임": "test-e@mail.test", "오팀장": "test-f@mail.test"}, "expect_address": "test-e@mail.test"}
+{"id": "h-t4", "text": "오팀장이 가격표 메일 보냈는지 받은편지함 확인해줘", "expect": "task", "holdout": true, "contacts": {"정과장": "test-d@mail.test", "한주임": "test-e@mail.test", "오팀장": "test-f@mail.test"}, "context": "[합성 회의 발췌] 제품 회의(가상). 오팀장: 가격표 최종본을 금요일까지 공유하기로 했다. 한주임: 경쟁사 조사 담당. 결정: 베타 테스트는 2주간 진행한다."}
+{"id": "h-t5", "text": "정과장에게 베타 테스트 일정 공유하는 초안 써 줘", "expect": "task", "holdout": true, "contacts": {"정과장": "test-d@mail.test", "한주임": "test-e@mail.test", "오팀장": "test-f@mail.test"}, "context": "[합성 회의 발췌] 제품 회의(가상). 오팀장: 가격표 최종본을 금요일까지 공유하기로 했다. 한주임: 경쟁사 조사 담당. 결정: 베타 테스트는 2주간 진행한다.", "expect_address": "test-d@mail.test"}
+{"id": "h-t6", "text": "쇼핑몰에서 노트북 거치대 얼마인지 알아봐", "expect": "task", "holdout": true}
+{"id": "h-a1", "text": "그 사람한테 메일 써줘", "expect": "ask", "holdout": true, "contacts": {"정과장": "test-d@mail.test", "한주임": "test-e@mail.test", "오팀장": "test-f@mail.test"}}
+{"id": "h-a2", "text": "윤대리에게 감사 메일 초안 남겨줘", "expect": "ask", "holdout": true, "contacts": {"정과장": "test-d@mail.test", "한주임": "test-e@mail.test", "오팀장": "test-f@mail.test"}, "no_task_address": true}
+{"id": "h-a3", "text": "확인 요청 메일 하나 써 줘", "expect": "ask", "holdout": true, "contacts": {"정과장": "test-d@mail.test", "한주임": "test-e@mail.test", "오팀장": "test-f@mail.test"}, "expect_choices": true}
+{"id": "h-a4", "text": "부장님께 주간 보고 초안 써줘", "expect": "ask", "holdout": true, "no_task_address": true}

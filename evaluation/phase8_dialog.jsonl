@@ -1,0 +1,42 @@
+{"id": "n01", "text": "안녕", "expect": "none"}
+{"id": "n02", "text": "고마워, 수고했어", "expect": "none"}
+{"id": "n03", "text": "너는 뭘 할 수 있어?", "expect": "none"}
+{"id": "n04", "text": "오늘 좀 피곤하네", "expect": "none"}
+{"id": "n05", "text": "ㅋㅋ 알겠어", "expect": "none"}
+{"id": "n06", "text": "잘 자", "expect": "none"}
+{"id": "n07", "text": "메일 제목 짧게 쓰는 팁 하나만 알려줘", "expect": "none"}
+{"id": "n08", "text": "1시간 반은 몇 분이야?", "expect": "none"}
+{"id": "n09", "text": "다음에 또 부탁할게", "expect": "none"}
+{"id": "n10", "text": "너 이름이 뭐야?", "expect": "none"}
+{"id": "r01", "text": "지난 회의에서 뭐 결정됐었지?", "expect": "route_claude"}
+{"id": "r02", "text": "이대리가 맡은 일이 뭐였어?", "expect": "route_claude"}
+{"id": "r03", "text": "어제 회의 요약해 줘", "expect": "route_claude", "context": "[합성 회의 발췌] 주간 회의(가상). 김팀장: 다음 주까지 3분기 매출 자료를 메일로 받기로 했다. 이대리: 고객 설문 결과 정리를 맡았다. 결정: 출시는 12월 첫 주로 한다."}
+{"id": "r04", "text": "마케팅 회의에서 예산 얘기 나왔었나?", "expect": "route_claude"}
+{"id": "r05", "text": "지난주 회의에서 내가 하기로 한 게 뭐야?", "expect": "route_claude"}
+{"id": "r06", "text": "회의에서 미해결로 남은 질문 정리해줘", "expect": "route_claude"}
+{"id": "r07", "text": "출시 일정 언제로 정했더라?", "expect": "route_claude", "context": "[합성 회의 발췌] 주간 회의(가상). 김팀장: 다음 주까지 3분기 매출 자료를 메일로 받기로 했다. 이대리: 고객 설문 결과 정리를 맡았다. 결정: 출시는 12월 첫 주로 한다."}
+{"id": "r08", "text": "김팀장이 회의에서 뭐라고 했어?", "expect": "route_claude"}
+{"id": "r09", "text": "회의록에서 일정 관련 내용만 뽑아줘", "expect": "route_claude"}
+{"id": "r10", "text": "지난 회의 분위기 어땠어?", "expect": "route_claude"}
+{"id": "t01", "text": "받은편지함에 새 메일 왔는지 확인해줘", "expect": "task"}
+{"id": "t02", "text": "인트라넷 공지사항에서 연말 휴무 기간 알려줘", "expect": "task"}
+{"id": "t03", "text": "test-a@mail.test에게 제목 '자료 확인 요청'으로 메일 초안 써서 임시 저장해 줘", "expect": "task", "expect_address": "test-a@mail.test"}
+{"id": "t04", "text": "김팀장에게 매출 자료 요청하는 메일 초안 써줘", "expect": "task", "contacts": {"김팀장": "test-b@mail.test", "이대리": "test-c@mail.test"}, "expect_address": "test-b@mail.test"}
+{"id": "t05", "text": "지난 회의에서 요청한 자료가 메일로 왔는지 확인하고, 없으면 확인 요청 초안 써 줘", "expect": "task", "contacts": {"김팀장": "test-b@mail.test", "이대리": "test-c@mail.test"}, "context": "[합성 회의 발췌] 주간 회의(가상). 김팀장: 다음 주까지 3분기 매출 자료를 메일로 받기로 했다. 이대리: 고객 설문 결과 정리를 맡았다. 결정: 출시는 12월 첫 주로 한다."}
+{"id": "t06", "text": "쇼핑몰에서 무선 마우스 가격 찾아봐줘", "expect": "task"}
+{"id": "t07", "text": "회의실 예약 페이지에서 비어 있는 회의실 확인해줘", "expect": "task"}
+{"id": "t08", "text": "메일함에서 '견적'이라는 단어 들어간 메일 찾아줘", "expect": "task"}
+{"id": "t09", "text": "이대리한테 회의 일정 변경 안내 메일 초안 남겨줘. 다음 주 화요일 3시로 바뀌었다고", "expect": "task", "contacts": {"김팀장": "test-b@mail.test", "이대리": "test-c@mail.test"}, "expect_address": "test-c@mail.test"}
+{"id": "t10", "text": "보낸편지함에 지난번 보낸 메일 남아 있는지 봐줘", "expect": "task"}
+{"id": "t11", "text": "김팀장", "expect": "task", "contacts": {"김팀장": "test-b@mail.test", "이대리": "test-c@mail.test"}, "history": [["user", "매출 자료 요청하는 메일 초안 하나 써줘"], ["assistant", "누구에게 보낼까요?"]], "expect_address": "test-b@mail.test"}
+{"id": "t12", "text": "회의에서 이대리가 맡은 일 정리해서 이대리에게 보낼 메일 초안 만들어줘", "expect": "task", "contacts": {"김팀장": "test-b@mail.test", "이대리": "test-c@mail.test"}, "context": "[합성 회의 발췌] 주간 회의(가상). 김팀장: 다음 주까지 3분기 매출 자료를 메일로 받기로 했다. 이대리: 고객 설문 결과 정리를 맡았다. 결정: 출시는 12월 첫 주로 한다.", "expect_address": "test-c@mail.test"}
+{"id": "a01", "text": "메일 초안 써줘", "expect": "ask"}
+{"id": "a02", "text": "그거 확인해줘", "expect": "ask"}
+{"id": "a03", "text": "최대리에게 메일 초안 써줘", "expect": "ask", "contacts": {"김팀장": "test-b@mail.test", "이대리": "test-c@mail.test"}, "no_task_address": true}
+{"id": "a04", "text": "예약 좀 봐줘", "expect": "ask", "accept": ["task"]}
+{"id": "a05", "text": "자료 요청 메일 써줘", "expect": "ask", "contacts": {"김팀장": "test-b@mail.test", "이대리": "test-c@mail.test"}, "expect_choices": true}
+{"id": "a06", "text": "사이트에서 그 가격 좀 봐줘", "expect": "ask"}
+{"id": "a07", "text": "팀장님께 보고 메일 초안 써줘", "expect": "ask", "no_task_address": true}
+{"id": "a08", "text": "어제 말한 거 처리해줘", "expect": "ask"}
+{"id": "a09", "text": "이 내용으로 초안 써줘", "expect": "ask"}
+{"id": "a10", "text": "박과장한테 일정 안내 메일 초안 남겨줘", "expect": "ask", "contacts": {"김팀장": "test-b@mail.test", "이대리": "test-c@mail.test"}, "no_task_address": true}

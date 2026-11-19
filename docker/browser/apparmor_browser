@@ -1,0 +1,62 @@
+# local-ai-agent 브라우저 컨테이너 전용 AppArmor 프로필 (D16)
+#
+# 기반: Docker Engine 29.5.2 (commit 568f755)의 docker-default 템플릿
+#   moby/moby vendor/github.com/moby/profiles/apparmor/template.go
+#   값: Imports=tunables/global, InnerImports=abstractions/base, DaemonProfile=unconfined
+# 변경점 (docker-default 대비, 이 세 가지뿐):
+#   1. abi 3.0 → 4.0  (userns 규칙은 ABI 4.0부터 존재)
+#   2. "network unix," 명시  (ABI 4.0에서는 network가 unix 소켓을 포함하지 않음 — 템플릿 주석 참고)
+#   3. "userns," 추가  (Ubuntu kernel.apparmor_restrict_unprivileged_userns=1 아래에서
+#      Chromium 자체 샌드박스가 사용자 네임스페이스를 만들고 그 안에서 chroot할 수 있게 함)
+# 적용: docker run --security-opt apparmor=local-ai-agent-browser ...
+# 로드: sudo apparmor_parser -r -W <이 파일>   (colima VM 안에서)
+
+abi <abi/4.0>,
+include <tunables/global>
+
+profile "local-ai-agent-browser" flags=(attach_disconnected,mediate_deleted) {
+  include <abstractions/base>
+
+  userns,
+
+  network,
+  network unix,
+  # Disallow AF_ALG (Linux kernel crypto API); see https://copy.fail/
+  deny network alg,
+  capability,
+  file,
+  umount,
+  # Host (privileged) processes may send signals to container processes.
+  signal (receive) peer=unconfined,
+  # runc may send signals to container processes (for "docker stop").
+  signal (receive) peer=runc,
+  # crun may send signals to container processes (for "docker stop" when used with crun OCI runtime).
+  signal (receive) peer=crun,
+  # dockerd may send signals to container processes (for "docker kill").
+  signal (receive) peer="unconfined",
+  # Container processes may send signals amongst themselves.
+  signal (send,receive) peer="local-ai-agent-browser",
+
+  deny @{PROC}/* w,   # deny write for all files directly in /proc (not in a subdir)
+  # deny write to files not in /proc/<number>/** or /proc/sys/**
+  deny @{PROC}/{[^1-9/],[^1-9/][^0-9/],[^1-9s/][^0-9y/][^0-9s/],[^1-9/][^0-9/][^0-9/][^0-9/]*}/** w,
+  deny @{PROC}/sys/[^k]** w,  # deny /proc/sys except /proc/sys/k* (effectively /proc/sys/kernel)
+  deny @{PROC}/sys/kernel/{?,??,[^s][^h][^m]**} w,  # deny everything except shm* in /proc/sys/kernel/
+  deny @{PROC}/sysrq-trigger rwklx,
+  deny @{PROC}/kcore rwklx,
+
+  deny mount,
+
+  deny /sys/[^f]*/** wklx,
+  deny /sys/f[^s]*/** wklx,
+  deny /sys/fs/[^c]*/** wklx,
+  deny /sys/fs/c[^g]*/** wklx,
+  deny /sys/fs/cg[^r]*/** wklx,
+  deny /sys/firmware/** rwklx,
+  deny /sys/devices/virtual/powercap/** rwklx,
+  deny /sys/kernel/security/** rwklx,
+
+  # allow processes within the container to trace each other,
+  # provided all other LSM and yama setting allow it.
+  ptrace (trace,tracedby,read,readby) peer="local-ai-agent-browser",
+}

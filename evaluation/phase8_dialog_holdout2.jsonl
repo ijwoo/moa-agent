@@ -1,0 +1,20 @@
+{"id": "g-n1", "text": "반가워", "expect": "none", "holdout": true}
+{"id": "g-n2", "text": "방금 건 고마웠어", "expect": "none", "holdout": true}
+{"id": "g-n3", "text": "너 쉬는 시간 있어?", "expect": "none", "holdout": true}
+{"id": "g-n4", "text": "아 배고프다", "expect": "none", "holdout": true, "context": "[합성 회의 발췌] 운영 회의(가상). 서팀장: 서버 점검은 토요일 새벽으로 한다. 문사원: 고객 공지 문안 작성 담당. 미해결: 점검 시간 동안 결제 기능을 막을지."}
+{"id": "g-n5", "text": "3 곱하기 12는?", "expect": "none", "holdout": true}
+{"id": "g-r1", "text": "점검 언제 하기로 했지?", "expect": "route_claude", "holdout": true, "context": "[합성 회의 발췌] 운영 회의(가상). 서팀장: 서버 점검은 토요일 새벽으로 한다. 문사원: 고객 공지 문안 작성 담당. 미해결: 점검 시간 동안 결제 기능을 막을지."}
+{"id": "g-r2", "text": "문사원이 맡은 거 뭐였어?", "expect": "route_claude", "holdout": true, "context": "[합성 회의 발췌] 운영 회의(가상). 서팀장: 서버 점검은 토요일 새벽으로 한다. 문사원: 고객 공지 문안 작성 담당. 미해결: 점검 시간 동안 결제 기능을 막을지.", "contacts": {"서팀장": "test-g@mail.test", "문사원": "test-h@mail.test"}}
+{"id": "g-r3", "text": "아직 결론 안 난 게 뭐가 있었지", "expect": "route_claude", "holdout": true, "context": "[합성 회의 발췌] 운영 회의(가상). 서팀장: 서버 점검은 토요일 새벽으로 한다. 문사원: 고객 공지 문안 작성 담당. 미해결: 점검 시간 동안 결제 기능을 막을지."}
+{"id": "g-r4", "text": "운영 회의 내용 간단히 알려줘", "expect": "route_claude", "holdout": true}
+{"id": "g-r5", "text": "회의 때 서팀장이 강조한 게 뭐야", "expect": "route_claude", "holdout": true, "contacts": {"서팀장": "test-g@mail.test", "문사원": "test-h@mail.test"}}
+{"id": "g-t1", "text": "받은편지함 두 번째 페이지도 확인해줘", "expect": "task", "holdout": true}
+{"id": "g-t2", "text": "인트라넷 공지 중에 점검 관련 글 있는지 찾아봐", "expect": "task", "holdout": true, "context": "[합성 회의 발췌] 운영 회의(가상). 서팀장: 서버 점검은 토요일 새벽으로 한다. 문사원: 고객 공지 문안 작성 담당. 미해결: 점검 시간 동안 결제 기능을 막을지."}
+{"id": "g-t3", "text": "문사원에게 고객 공지 문안 진행 상황 물어보는 메일 초안 남겨줘", "expect": "task", "holdout": true, "contacts": {"서팀장": "test-g@mail.test", "문사원": "test-h@mail.test"}, "context": "[합성 회의 발췌] 운영 회의(가상). 서팀장: 서버 점검은 토요일 새벽으로 한다. 문사원: 고객 공지 문안 작성 담당. 미해결: 점검 시간 동안 결제 기능을 막을지.", "expect_address": "test-h@mail.test"}
+{"id": "g-t4", "text": "test-z@mail.test로 점검 일정 안내 초안 하나 저장해줘", "expect": "task", "holdout": true, "expect_address": "test-z@mail.test"}
+{"id": "g-t5", "text": "쇼핑몰에서 USB 허브 검색해서 제일 싼 거 알려줘", "expect": "task", "holdout": true}
+{"id": "g-t6", "text": "서팀장한테서 온 메일 있는지 봐줘", "expect": "task", "holdout": true, "contacts": {"서팀장": "test-g@mail.test", "문사원": "test-h@mail.test"}}
+{"id": "g-a1", "text": "메일 하나만 써줘", "expect": "ask", "holdout": true, "contacts": {"서팀장": "test-g@mail.test", "문사원": "test-h@mail.test"}, "expect_choices": true}
+{"id": "g-a2", "text": "고객센터 담당자한테 문의 메일 초안 써줘", "expect": "ask", "holdout": true, "contacts": {"서팀장": "test-g@mail.test", "문사원": "test-h@mail.test"}, "no_task_address": true}
+{"id": "g-a3", "text": "그 건 다시 해줘", "expect": "ask", "holdout": true}
+{"id": "g-a4", "text": "대표님께 감사 인사 메일 남겨줘", "expect": "ask", "holdout": true, "no_task_address": true}

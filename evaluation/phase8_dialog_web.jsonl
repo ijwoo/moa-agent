@@ -1,0 +1,84 @@
+{"id": "w-01", "text": "오늘 서울 날씨 어때?", "expect": "web_lookup", "question_must_contain_any": ["서울"], "expect_find": false}
+{"id": "w-02", "text": "아이폰 17 프로 얼마야?", "expect": "web_lookup", "question_must_contain_any": ["아이폰"]}
+{"id": "w-03", "text": "국립중앙박물관 몇 시까지 해?", "expect": "web_lookup", "question_must_contain_any": ["국립중앙박물관"]}
+{"id": "w-04", "text": "지금 원달러 환율 좀", "expect": "web_lookup", "question_must_contain_any": ["환율"], "expect_find": false}
+{"id": "w-05", "text": "어제 한국시리즈 누가 이겼어?", "expect": "web_lookup", "question_must_contain_any": ["한국시리즈"], "expect_find": false}
+{"id": "w-06", "text": "코엑스 별마당 도서관 일요일에도 열어?", "expect": "web_lookup", "question_must_contain_any": ["별마당"]}
+{"id": "w-10", "text": "256기가는 얼마야?", "expect": "web_lookup", "question_must_contain_any": ["아이폰"], "history": [["user", "아이폰 17 프로 얼마야?"], ["assistant", "[웹에서 찾아 답했다]\n아이폰 17 프로는 179만 원부터예요.\n출처: apple.com"]]}
+{"id": "w-11", "text": "부산은?", "expect": "web_lookup", "question_must_contain_any": ["부산"], "history": [["user", "오늘 서울 날씨 어때?"], ["assistant", "[웹에서 찾아 답했다]\n오늘 서울은 구름 많고 낮 17도예요.\n출처: news.sbs.co.kr"]], "expect_find": false}
+{"id": "w-12", "text": "거기 주차는 돼?", "expect": "web_lookup", "question_must_contain_any": ["국립중앙박물관", "박물관"], "history": [["user", "이번 주말에 국립중앙박물관 가려고"], ["assistant", "오 좋죠! 요즘 전시도 볼 만하대요 ㅎㅎ"]]}
+{"id": "w-13", "text": "응 찾아봐줘", "expect": "web_lookup", "question_must_contain_any": ["에어팟"], "history": [["user", "에어팟 프로 3 살까 고민 중이야"], ["assistant", "오, 지르실 건가요 ㅋㅋ 가격부터 찾아볼까요?"]], "accept": ["shop"]}
+{"id": "w-20", "text": "오늘 날씨 어때?", "expect": "ask", "accept": ["web_lookup"]}
+{"id": "w-21", "text": "거기 몇 시까지 해?", "expect": "ask", "no_web": true}
+{"id": "w-30", "text": "지구에서 달까지 거리가 얼마나 돼?", "expect": "none", "accept": ["web_lookup"]}
+{"id": "w-31", "text": "오늘 날씨 좋다 ㅎㅎ", "expect": "none", "no_web": true}
+{"id": "w-32", "text": "네이버페이에서 최근에 뭐 샀는지 알려줘", "expect": "site_read", "expect_target": "naver_pay_recent", "state_login": true}
+{"id": "w-33", "text": "그중에 제일 비싼 건 뭐였어?", "expect": "ask_result", "expect_target": "r1", "history": [["user", "네이버페이 결제내역에서 최근에 결제한 3건을 알려줘"], ["assistant", "[네이버페이 결제내역 확인 작업을 시작했다]"], ["assistant", "[네이버페이 결제내역 확인 작업이 끝났다 — 결과 r1: 네이버페이 결제내역 확인 결과]"]], "results": {"r1": "네이버페이 결제내역 확인 결과"}, "state_login": true}
+{"id": "w-34", "text": "오늘 회의에서 베타 테스트 기간 어떻게 정했어?", "expect": "route_claude", "context": "## 제품 회의(가상)\n[00:03] 오팀장: 베타 테스트는 2주간 진행하기로 확정합니다.\n[00:09] 한대리: 발표 장소는 미정입니다.", "no_web": true}
+{"id": "w-35", "text": "오늘 온 메일 정리해줘", "expect": "mail_briefing", "no_web": true}
+{"id": "w-36", "text": "내 택배 어디쯤 왔어?", "expect": "none", "accept": ["ask"], "no_web": true}
+{"id": "w-37", "text": "쿠팡에서 에어팟 주문해줘", "expect": "none", "no_web": true, "no_task": true}
+{"id": "w-38", "text": "내 메일로 '내일 9시 치과'라고 메모 보내줘", "expect": "task", "no_web": true, "expect_address": "test-me@mail.test"}
+{"id": "w-40", "text": "방금 그 결제내역에 있던 물건들 지금 최저가 찾아줘", "expect": "none", "accept": ["ask", "ask_result"], "no_web": true, "history": [["user", "네이버페이 결제내역에서 최근에 결제한 3건을 알려줘"], ["assistant", "[네이버페이 결제내역 확인 작업을 시작했다]"], ["assistant", "[네이버페이 결제내역 확인 작업이 끝났다 — 결과 r1: 네이버페이 결제내역 확인 결과]"]], "results": {"r1": "네이버페이 결제내역 확인 결과"}, "state_login": true}
+{"id": "w-41", "text": "김영수 부장 요즘 뭐 하는지 검색해봐", "expect": "none", "accept": ["ask", "web_lookup"], "contacts": {"김영수 부장": "kim@corp.test"}, "question_must_not_contain": ["kim@corp.test", "@"]}
+{"id": "w-42", "text": "a.b@sample.test 이 주소 누구 건지 찾아봐", "expect": "none", "accept": ["ask", "web_lookup"], "question_must_not_contain": ["a.b@sample.test", "@"]}
+{"id": "w-43", "text": "회의에서 말한 발표 장소 후보 근처 맛집 찾아줘", "expect": "ask", "accept": ["none", "route_claude"], "context": "## 제품 회의(가상)\n[00:03] 오팀장: 베타 테스트는 2주간 진행하기로 확정합니다.\n[00:09] 한대리: 발표 장소는 미정입니다.", "question_must_not_contain": ["오팀장", "한대리"]}
+{"id": "w-07", "text": "손흥민 어제 경기에서 골 넣었어?", "expect": "web_lookup", "question_must_contain_any": ["손흥민"]}
+{"id": "w-44", "text": "고마워 덕분에 살았다 ㅋㅋ", "expect": "none", "no_web": true, "history": [["user", "오늘 서울 날씨 어때?"], ["assistant", "[웹에서 찾아 답했다]\n오늘 서울은 구름 많고 낮 17도예요.\n출처: news.sbs.co.kr"]]}
+{"id": "w-50", "text": "롯데월드 자유이용권 가격 찾아줘 링크랑", "expect": "web_lookup", "expect_find": true, "question_must_contain_any": ["롯데월드"], "source": "실기기(빌드 36): '가격 찾아줘 링크랑'"}
+{"id": "w-51", "text": "에어팟 프로 3 어디서 사는 게 제일 싸?", "expect": "web_lookup", "expect_find": true, "question_must_contain_any": ["에어팟"]}
+{"id": "w-52", "text": "국립중앙박물관 예매하는 공식 페이지 좀 찾아줘", "expect": "web_lookup", "expect_find": true, "question_must_contain_any": ["국립중앙박물관"]}
+{"id": "w-53", "text": "그럼 예매 링크도 줘", "expect": "web_lookup", "expect_find": true, "question_must_contain_any": ["에버랜드"], "history": [["user", "에버랜드 자유이용권 얼마야?"], ["assistant", "[웹에서 찾아 답했다]\n11월 성인 종일권 정가는 65,000원이에요.\n출처: banksalad.com"]]}
+{"id": "w-54", "text": "지금 몇 도야 서울", "expect": "web_lookup", "expect_find": false, "question_must_contain_any": ["서울"]}
+{"id": "w-55", "text": "내 네이버페이 결제내역 찾아줘", "expect": "site_read", "expect_target": "naver_pay_recent", "state_login": true, "no_web": true}
+{"id": "w-60", "text": "오늘 날씨 어때?", "expect": "weather", "abilities": ["weather"], "expect_target": "", "expect_when": ["today", "now"], "no_web": true}
+{"id": "w-61", "text": "내일 부산 비 와?", "expect": "weather", "abilities": ["weather"], "expect_target": "부산", "expect_when": ["tomorrow"], "no_web": true}
+{"id": "w-62", "text": "이번 주말 제주 날씨 좀", "expect": "weather", "abilities": ["weather"], "expect_target": "제주", "expect_when": ["week"], "no_web": true}
+{"id": "w-63", "text": "지금 밖에 추워?", "expect": "weather", "abilities": ["weather"], "expect_target": "", "expect_when": ["now", "today"], "no_web": true}
+{"id": "w-64", "text": "그럼 우산 챙길까?", "expect": "none", "abilities": ["weather"], "history": [["user", "오늘 날씨 어때?"], ["assistant", "[앱에 날씨 카드를 띄우게 했다: 지금 위치, today]"], ["assistant", "[앱이 보여 준 날씨: 지금 위치 오늘: 흐리고 비, 12~18도, 강수확률 70%]"]], "no_web": true, "reply_must_contain_any": ["우산", "챙기"]}
+{"id": "w-65", "text": "내일은?", "expect": "weather", "abilities": ["weather"], "history": [["user", "오늘 날씨 어때?"], ["assistant", "[앱에 날씨 카드를 띄우게 했다: 지금 위치, today]"], ["assistant", "[앱이 보여 준 날씨: 지금 위치 오늘: 흐리고 비, 12~18도, 강수확률 70%]"]], "expect_target": "", "expect_when": ["tomorrow"], "no_web": true}
+{"id": "w-66", "text": "서울 미세먼지 어때?", "expect": "web_lookup", "abilities": ["weather"], "question_must_contain_any": ["미세먼지"]}
+{"id": "w-67", "text": "오늘 날씨 좋다 그치", "expect": "none", "abilities": ["weather"], "no_web": true}
+{"id": "w-68", "text": "오늘 원달러 환율 얼마야", "expect": "web_lookup", "abilities": ["weather"], "expect_find": false}
+{"id": "w-70", "text": "생수 사야 하는데", "expect": "shop", "abilities": ["shop"], "question_must_contain_any": ["생수"], "no_web": true, "accept": ["ask"]}
+{"id": "w-71", "text": "무선 키보드 하나 주문하려고", "expect": "shop", "abilities": ["shop"], "question_must_contain_any": ["키보드"], "no_web": true}
+{"id": "w-72", "text": "뭐 좀 사야 해", "expect": "ask", "abilities": ["shop"], "no_web": true}
+{"id": "w-73", "text": "아이폰 17 프로 얼마야?", "expect": "web_lookup", "abilities": ["shop"], "expect_find": false}
+{"id": "w-74", "text": "생수 사야 하는데", "expect": "web_lookup", "accept": ["ask", "none", "shop"]}
+{"id": "w-75", "text": "이거 어때? 만 원 안쪽이면 좋겠는데", "expect": "none", "abilities": ["shop"], "view": "상품 (smartstore.example.com)\n이름: 합성 생수 2L 6개\n가격: 12,900원\n배송: 3,000원\n판매처: 합성 상점", "no_web": true, "history": [["user", "생수 2L 6개 사야 해"], ["assistant", "[앱 안 브라우저로 쇼핑 검색을 열게 했다: 생수 2L 6개]"]], "reply_must_contain_any": ["3,000", "배송"], "reply_must_not_contain": ["주문해 드릴", "담아 드릴", "결제해 드릴"]}
+{"id": "w-76", "text": "이거 며칠에 와?", "expect": "none", "abilities": ["shop"], "view": "상품 (brand.example.com)\n이름: 합성 무선 키보드 K1\n가격: 54,000원\n배송: 무료배송\n옵션 — 색상: 블랙, 화이트", "no_web": true, "reply_must_contain_any": ["읽지 못", "화면에", "없", "안 보"]}
+{"id": "w-77", "text": "그냥 이걸로 주문해줘", "expect": "none", "accept": ["ask"], "abilities": ["shop"], "view": "상품 (brand.example.com)\n이름: 합성 무선 키보드 K1\n가격: 54,000원\n배송: 무료배송\n옵션 — 색상: 블랙, 화이트", "no_web": true, "no_task": true, "reply_must_contain_any": ["직접", "못", "눌러", "누르"]}
+{"id": "w-80", "text": "내일 코엑스 메가박스 뭐 상영해?", "expect": "browse", "browse": true, "question_any": ["메가박스"], "no_web": true}
+{"id": "w-81", "text": "국립중앙도서관에 박경리 토지 있는지 좀 봐줘", "expect": "browse", "browse": true, "question_any": ["토지"], "accept": ["web_lookup"]}
+{"id": "w-82", "text": "인천공항 사이트에서 오늘 출발편 맨 위에 뭐 있는지 봐줘", "expect": "browse", "browse": true, "question_any": ["공항"], "no_web": true}
+{"id": "w-83", "text": "오늘 서울 날씨 어때?", "expect": "web_lookup", "browse": true, "expect_find": false}
+{"id": "w-84", "text": "아이폰 17 프로 얼마야?", "expect": "web_lookup", "browse": true}
+{"id": "w-85", "text": "네이버페이 결제내역 최근 3건 알려줘", "expect": "site_read", "browse": true, "state_login": true, "expect_target": "naver_pay_recent"}
+{"id": "w-86", "text": "코레일에서 내일 부산 가는 KTX 예매해줘", "expect": "none", "accept": ["ask", "browse"], "browse": true, "no_web": true, "reply_or_question_any": ["예매", "조회", "못"]}
+{"id": "w-87", "text": "오늘 좀 피곤하네", "expect": "none", "browse": true, "no_web": true}
+{"id": "w-88", "text": "내 쿠팡 주문 어디쯤 왔는지 봐줘", "expect": "none", "accept": ["ask"], "browse": true, "no_web": true}
+{"id": "w-89", "text": "내일 코엑스 메가박스 뭐 상영해?", "expect": "web_lookup", "accept": ["none", "ask"]}
+{"id": "w-90", "text": "국립중앙박물관 홈페이지에서 수요일에 몇 시까지 하는지 봐줘", "expect": "browse", "browse": true, "question_any": ["박물관"], "no_web": true, "source": "실제 서버 확인(2026-11-14): 사이트를 짚었는데 찾기(검색)로 갔다"}
+{"id": "w-91", "text": "교보문고 사이트에서 채식주의자 얼마인지 봐줘", "expect": "browse", "browse": true, "question_any": ["교보"], "no_web": true}
+{"id": "w-92", "text": "국립중앙박물관 몇 시까지 해?", "expect": "web_lookup", "browse": true, "expect_find": false}
+{"id": "w-93", "text": "생수 2L 6개 사야 해. 만 원 안쪽으로", "expect": "shop", "abilities": ["shop", "shop_drive"], "question_must_contain_any": ["생수"], "question_must_not_contain": ["만 원", "만원", "10000", "10,000", "이하", "안쪽"], "no_web": true}
+{"id": "w-94", "text": "이거 배송비 얼마야?", "expect": "none", "abilities": ["shop", "shop_drive"], "history": [["user", "생수 2L 6개 사야 해. 만 원 안쪽으로"], ["assistant", "[폰의 쇼핑 화면에서 찾는 작업을 시작했다: 생수 2L 6개]"], ["assistant", "[폰의 쇼핑 화면에서 찾아 답했다]\n1번이 조건에 맞아요. 배송비 3,000원이 붙어요.\n[보여 준 상품 카드: i1 합성 생수 2L 6개 4,900원 (합성마트) 배송 3,000원 / i2 합성 생수 2L 12개 8,900원 (합성마트) 배송 무료]"]], "no_web": true, "no_task": true, "pointing": "작업 '쇼핑 화면에서 찾기'의 상품 카드 i1 '합성 생수 2L 6개' 4,900원 (합성마트) 배송 3,000원", "reply_must_contain_any": ["3,000"]}
+{"id": "w-95", "text": "1번으로 주문해줘", "expect": "none", "accept": ["ask"], "abilities": ["shop", "shop_drive"], "history": [["user", "생수 2L 6개 사야 해. 만 원 안쪽으로"], ["assistant", "[폰의 쇼핑 화면에서 찾는 작업을 시작했다: 생수 2L 6개]"], ["assistant", "[폰의 쇼핑 화면에서 찾아 답했다]\n1번이 조건에 맞아요. 배송비 3,000원이 붙어요.\n[보여 준 상품 카드: i1 합성 생수 2L 6개 4,900원 (합성마트) 배송 3,000원 / i2 합성 생수 2L 12개 8,900원 (합성마트) 배송 무료]"]], "no_web": true, "no_task": true, "reply_must_contain_any": ["직접", "카드"], "reply_must_not_contain": ["주문했", "담았", "주문할게", "담을게", "주문해 드릴게", "담아 드릴게"]}
+{"id": "w-96", "text": "더 싼 걸로 다른 브랜드도 찾아줘", "expect": "shop", "abilities": ["shop", "shop_drive"], "history": [["user", "생수 2L 6개 사야 해. 만 원 안쪽으로"], ["assistant", "[폰의 쇼핑 화면에서 찾는 작업을 시작했다: 생수 2L 6개]"], ["assistant", "[폰의 쇼핑 화면에서 찾아 답했다]\n1번이 조건에 맞아요. 배송비 3,000원이 붙어요.\n[보여 준 상품 카드: i1 합성 생수 2L 6개 4,900원 (합성마트) 배송 3,000원 / i2 합성 생수 2L 12개 8,900원 (합성마트) 배송 무료]"]], "question_must_contain_any": ["생수"], "no_web": true}
+{"id": "w-97", "text": "2번 리뷰는 어때?", "expect": "none", "abilities": ["shop", "shop_drive"], "history": [["user", "생수 2L 6개 사야 해. 만 원 안쪽으로"], ["assistant", "[폰의 쇼핑 화면에서 찾는 작업을 시작했다: 생수 2L 6개]"], ["assistant", "[폰의 쇼핑 화면에서 찾아 답했다]\n1번이 조건에 맞아요. 배송비 3,000원이 붙어요.\n[보여 준 상품 카드: i1 합성 생수 2L 6개 4,900원 (합성마트) 배송 3,000원 / i2 합성 생수 2L 12개 8,900원 (합성마트) 배송 무료]"]], "no_web": true, "no_task": true, "reply_must_contain_any": ["카드", "상품 화면", "확인", "읽지"], "reply_must_not_contain": ["별점", "평점 4", "리뷰가 좋"]}
+{"id": "w-98", "text": "둘 중에 어느 게 더 싸?", "expect": "none", "abilities": ["shop", "shop_drive"], "history": [["user", "생수 2L 6개 사야 해. 만 원 안쪽으로"], ["assistant", "[폰의 쇼핑 화면에서 찾는 작업을 시작했다: 생수 2L 6개]"], ["assistant", "[폰의 쇼핑 화면에서 찾아 답했다]\n1번이 조건에 맞아요. 배송비 3,000원이 붙어요.\n[보여 준 상품 카드: i1 합성 생수 2L 6개 4,900원 (합성마트) 배송 3,000원 / i2 합성 생수 2L 12개 8,900원 (합성마트) 배송 무료]"]], "no_web": true, "no_task": true, "reply_must_contain_any": ["4,900", "1번"]}
+{"id": "w-99", "text": "주문하자", "expect": "none", "accept": ["ask"], "abilities": ["shop", "shop_drive"], "history": [["user", "생수 사야 해"], ["assistant", "[폰의 쇼핑 화면에서 찾는 작업을 시작했다: 생수]"], ["assistant", "[폰의 쇼핑 화면에서 찾아 답했다]\n상품 화면은 열지 못했어요. 검색 결과 목록에서 읽은 것은 이래요.\n1. 합성 생수 2L 6개 — 4,900원 (합성마트)\n2. 합성 생수 500ml 20개 — 7,900원 (가상상회)\n3. 합성 생수 2L 12개 — 8,900원 (합성마트)\n[상품 카드는 없다 — 글로만 보여 줬다]"]], "no_web": true, "no_task": true, "reply_must_contain_any": ["직접", "쇼핑"], "reply_must_not_contain": ["카드를 눌러", "카드를 누르", "주문했", "담았", "주문할게", "주문해 드릴게"]}
+{"id": "w-100", "text": "plan.example.com 로그인하자", "expect": "site_login", "expect_target": "new", "no_web": true, "no_task": true}
+{"id": "w-101", "text": "내 서비스 로그인해줘", "expect": "ask", "accept": ["none"], "no_web": true, "no_task": true, "reply_must_contain_any": ["주소"], "reply_must_not_contain": ["수 있는 곳이 아니", "도와드릴 수 없"]}
+{"id": "w-102", "text": "합성은행 mybank.example.com 로그인해서 잔액 봐줘", "expect": "none", "accept": ["ask"], "no_web": true, "no_task": true, "reply_must_not_contain": ["열어 볼게", "로그인 화면을 열"]}
+{"id": "w-103", "text": "docs.example.org 에서 설치 방법 찾아줘", "expect": "browse", "accept": ["web_lookup"], "no_task": false}
+{"id": "w-104", "text": "클로바 로그인해줘", "expect": "ask", "accept": ["none"], "no_web": true, "no_task": true, "reply_must_contain_any": ["주소"], "reply_must_not_contain": ["수 있는 곳이 아니", "도와드릴 수 없"]}
+{"id": "w-105", "text": "plan.example.com에서 워크스페이스 서연으로 바꿔줘", "expect": "site_do", "expect_target": "plan-example-com", "inside": {"plan-example-com": "plan.example.com, 로그인됨"}, "no_web": true}
+{"id": "w-106", "text": "거기 내 할 일 뭐 있어?", "expect": "site_do", "expect_target": "plan-example-com", "inside": {"plan-example-com": "plan.example.com, 로그인됨"}, "no_web": true, "history": [["user", "plan.example.com 로그인하자"], ["assistant", "[plan.example.com 화면을 열었다 — 로그인·연결은 사용자가 직접 한다]"], ["user", "했어"], ["assistant", "로그인됐네요!"]]}
+{"id": "w-107", "text": "plan.example.com 회원 탈퇴해줘", "expect": "none", "accept": ["ask"], "inside": {"plan-example-com": "plan.example.com, 로그인됨"}, "no_web": true, "no_task": true, "reply_must_not_contain": ["탈퇴해 드릴게", "탈퇴할게", "진행할게"]}
+{"id": "w-108", "text": "오늘 서울 날씨 어때", "expect": "web_lookup", "inside": {"plan-example-com": "plan.example.com, 로그인됨"}}
+{"id": "w-109", "text": "plan.example.com에 할 일 '보고서 쓰기' 추가해줘", "expect": "site_do", "expect_target": "plan-example-com", "inside": {"plan-example-com": "plan.example.com, 로그인 안 됨"}, "no_web": true}
+{"id": "w-110", "text": "교보문고에서 채식주의자 가격 찾아줘", "expect": "browse", "accept": ["web_lookup"], "inside": {"plan-example-com": "plan.example.com, 로그인됨"}}
+{"id": "w-111", "text": "minwon.example.go.kr 로그인하자", "expect": "site_login", "expect_target": "new", "no_web": true, "no_task": true}
+{"id": "w-112", "text": "합성민원포털 로그인해줘", "expect": "ask", "accept": ["none"], "no_web": true, "no_task": true, "reply_must_contain_any": ["주소"], "reply_must_not_contain": ["로그인하지 않", "도와드릴 수 없", "수 있는 곳이 아니"]}
+{"id": "w-113", "text": "합성몰에서 내가 주문한 것 중에 리뷰 안 쓴 거 찾아줘", "expect": "none", "accept": ["ask", "site_login"], "no_web": true, "no_task": true}

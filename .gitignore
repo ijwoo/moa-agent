@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.pytest_cache/
+# 비밀 정보
+.env
+*.pem
+*.key
+# 실행 산출물
+runs/
+logs/
+screenshots/
+browser-profiles/
+downloads/
+# 모델 파일 (저장소에 넣지 않음)
+models/
+*.gguf
+*.safetensors
+.DS_Store
+# 사용자별 기억 저장소 (저장소에 넣지 않음)
+data/

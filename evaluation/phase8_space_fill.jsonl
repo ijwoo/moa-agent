@@ -1,0 +1,15 @@
+{"id": "sf-01", "say": "오늘 원달러 환율 카드", "expect": "ok", "first": ["stat"]}
+{"id": "sf-02", "say": "오늘 국내 금 한 돈 시세 카드", "expect": "ok", "first": ["stat", "pairs"]}
+{"id": "sf-06", "say": "엔화 환율도 카드로", "expect": "ok", "first": ["stat"]}
+{"id": "sf-07", "say": "서울 오늘 미세먼지 카드", "expect": "ok", "first": ["pairs", "stat", "list", "text"]}
+{"id": "sf-08", "say": "다음 공휴일이 언제인지 보여주는 카드", "expect": "ok", "first": ["date", "stat", "text"], "has": "date", "year": true}
+{"id": "sf-09", "say": "이번 주 개봉 영화 카드", "expect": "ok", "first": ["list", "text"], "has": "list"}
+{"id": "sf-10", "say": "오늘 주요 뉴스 헤드라인 세 개 카드", "expect": "ok", "first": ["list"]}
+{"id": "sf-11", "say": "프리미어리그 순위 상위 다섯 팀 카드", "expect": "ok", "first": ["list", "text"], "has": "list"}
+{"id": "sf-12", "say": "서울 오늘 해 지는 시각 카드", "expect": "ok", "first": ["stat", "text", "pairs"]}
+{"id": "sf-14", "say": "오늘 서울 휘발유 평균 가격 카드", "expect": "ok", "first": ["stat"]}
+{"id": "sf-15", "say": "이번 주 로또 당첨 번호 카드", "expect": "ok", "first": ["stat", "list", "text"]}
+{"id": "sf-17", "say": "한국은행 기준금리 카드", "expect": "ok", "first": ["stat", "text"]}
+{"id": "sf-18", "say": "서울 내일 날씨 예보 카드", "expect": "ok", "first": ["pairs", "stat", "text", "list"]}
+{"id": "sf-19", "say": "올해 수능일까지 며칠 남았는지 카드", "expect": "ok", "first": ["date", "stat", "text"], "year": true}
+{"id": "sf-20", "say": "서울 오늘 미세먼지랑 초미세먼지 수치 카드", "expect": "ok", "first": ["pairs", "stat", "text", "list"]}
