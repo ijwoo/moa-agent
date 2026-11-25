@@ -16,8 +16,8 @@
 <br/>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/media/moa-demo-dark.gif">
-  <img src="docs/media/moa-demo.gif" width="360" alt="모아 데모: 명령 → 폰으로 사람 확인 넘기기 → 승인 및 결과 카드">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/media/moa-demo-ko-dark.gif">
+  <img src="docs/media/moa-demo-ko.gif" width="360" alt="모아 데모: 명령 → 폰으로 사람 확인 넘기기 → 승인 및 결과 카드">
 </picture>
 
 <sub>아이폰에서 요청 → 맥 브라우저가 작업 → 캡차 화면에서 멈춤 → 폰으로 화면을 넘겨 사람이 직접 해결 → 이어서 완료. (합성 데모 데이터)</sub>
