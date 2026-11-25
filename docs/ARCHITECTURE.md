@@ -1,33 +1,33 @@
 # 설계 문서
 
-> 현재 상태: **Phase 1 구현됨** (ModelProvider·QwenProvider·TaskRequest). 나머지는 목표 설계. 구현되면 해당 절에 "구현됨"을 표시한다.
-> 실제 패키지 경로는 `src/agent/` 아래 (`src/agent/providers`, `src/agent/tasks` …).
+> 현재 상태: **Phase 1~8 구현됨** — 로컬·클라우드 Provider, 도구 호출, 브라우저 샌드박스, 에이전트 루프, Sandbox Manager, 기억, 앱용 HTTP API, 작업실. 각 절에 구현 상태를 표시한다.
+> 실제 패키지 경로는 `src/agent/` 아래다 (`src/agent/providers`, `src/agent/tools`, `src/agent/core` …).
 
 ## 구성 요소
 
 ```
-          자연어 요청 (CLI → 이후 FastAPI → 이후 iOS 앱)
+          자연어 요청 (iOS 앱 → API → 에이전트 · CLI)
                           │
                 ┌─────────▼──────────┐
-                │    Agent Runtime   │  src/core
+                │    Agent Runtime   │  src/agent/core
                 │ Planner · Executor │  Observe → Reason → Act → Verify
                 │ Verifier · Limits  │
                 └───┬────────────┬───┘
        정규화 응답   │            │  검증된 도구 호출만
         ┌───────────▼───┐   ┌────▼─────────────┐
-        │ ModelProvider │   │  Tools           │  src/tools (스키마·입력 검증)
+        │ ModelProvider │   │  Tools           │  src/agent/tools (스키마·입력 검증)
         │ Qwen │ Claude │   │  navigate observe│
         └───────────────┘   │  click type ...  │
-     src/providers          └────┬─────────────┘
+     src/agent/providers    └────┬─────────────┘
                                  │
                         ┌────────▼─────────┐
-                        │ Browser Runtime  │  src/browser (Playwright)
+                        │ Browser Runtime  │  src/agent/browser (Playwright)
                         └────────┬─────────┘
                         ┌────────▼─────────┐
-                        │ Sandbox          │  src/sandbox (Docker Chromium,
-                        │ (사용자별 격리)    │   이후 Sandbox Manager)
+                        │ Sandbox          │  src/agent/sandbox (Docker Chromium,
+                        │ (사용자별 격리)    │   Sandbox Manager)
                         └──────────────────┘
-  src/memory: 맥락·검색 (Phase 6)   src/evaluation: 벤치마크·지표   src/api: FastAPI (이후)
+  src/agent/memory: 맥락·검색 (Phase 6)   evaluation/·scripts/bench_*.py: 벤치마크·지표   src/agent/api: 앱용 HTTP API (Phase 8)
 ```
 
 ## 1. ModelProvider — 구현됨 (Phase 1: QwenProvider만)
@@ -72,7 +72,7 @@
 - `src/agent/api/`: `server.py`(127.0.0.1 전용 HTTP, 토큰 인증, 오류 코드), `jobs.py`(작업 대기열·상태·승인 대기), `runner.py`(로컬 모델 + 읽기·초안 전용 정책 + 사용자 샌드박스·기억). 명세는 `docs/API.md`.
 - 경로: iOS 앱 → (tailnet HTTPS, tailscale serve) → 127.0.0.1:8765 → JobManager → AgentLoop → 샌드박스 브라우저. 목표 구조의 "중계 서버"는 거치지 않는다(축소판).
 
-## 4.6 작업실 — 모델이 짠 코드를 실행하는 격리된 방 (D96, 구현 중)
+## 4.6 작업실 — 모델이 짠 코드를 실행하는 격리된 방 (D96, 구현됨)
 원칙 3("모델은 판단, 도구는 실행")의 **유일한 예외**. 보고서·그래프·화면 시안처럼 정해진 도구로는 폭이 모자란 일을 위해, 작업실 컨테이너 안에서만 모델이 쓴 명령을 실행한다.
 작업실은 바깥 길이 없는 내부망에 붙고, 유일한 바깥 길인 나가는 문(프록시)은 공인 IP로만 잇는다(맥 서버·사설망·tailnet 차단). 비밀·로그인·개인 자료는 넣지 않는다.
 로그인한 사이트 일은 작업실이 아니라 기존 '사이트 안에서 하기'를 통해서만 — 돈·게시 버튼은 승인 카드.

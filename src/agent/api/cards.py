@@ -106,7 +106,7 @@ def make_card(job, result: dict, cloud: ModelProvider | None, local: ModelProvid
         return None
     first = answer.splitlines()[0]
     if not did and re.search(r"접근 거부|Access Denied|차단|하지 못했|못 했|못했|찾지 못|열리지 않", first):
-        # 끝까지 돌았지만 부탁한 일을 하지 못했다고 보고했다(실기기 2026-11-16: 쿠팡 검색 결과가 접근 거부 — 'answer' 카드에 '실패'라는 제목이 붙었다)
+        # 끝까지 돌았지만 부탁한 일을 하지 못했다고 보고했다(실기기 2026-11-16: 한 쇼핑몰의 검색 결과가 접근 거부 — 'answer' 카드에 '실패'라는 제목이 붙었다)
         card = failed({"report": {"blocked": [answer]}}, short_why(first, "하지 못했어요"), see)
         return card
     model = local if private else (cloud or local)

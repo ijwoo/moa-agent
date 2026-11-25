@@ -2,9 +2,9 @@
 
 iOS 앱이 Mac의 에이전트에 작업을 맡기고, 진행 상태를 조회하고, 초안을 승인·거부하는 HTTP API.
 
-- **범위**: 읽기와 초안 저장, 그리고 **사용자 본인 주소로만** 실제 메일 발송(v3, 승인 후). 남에게 보내기·삭제·결제·신청 같은 외부 동작은 서버가 실행하지 않는다(승인 대상도 아니다).
-- **대상 사이트**: 현재는 Mac의 로컬 합성 사이트(테스트 쇼핑몰·메일·공지·회의실 예약)뿐이다. 실제 사이트는 지원하지 않는다.
-- **모델**: Mac의 로컬 모델만 쓴다. 앱이 보낸 내용은 외부 서비스로 나가지 않는다.
+- **범위**: 읽기, 초안 저장, 승인 뒤 실행. 실행하는 것은 **사용자 본인 주소로 보내는 메일**과, 허락해 둔 경우(`SEND_OTHERS=1`) **정해 둔 사람에게 보내는 메일**, 그리고 사용자가 허락한 사이트 안의 단추 하나다. 삭제·결제·신청처럼 되돌릴 수 없는 동작은 승인 카드 없이는 실행하지 않는다.
+- **대상 사이트**: 개발·측정에 쓰는 맥의 합성 사이트(테스트 쇼핑몰·메일·공지·회의실 예약), 사용자가 로그인해 둔 실제 사이트(정해 둔 읽기와 `site_do`), 그리고 공개 사이트(`web_browse`)다.
+- **모델**: 대화 판단은 켜져 있으면 Claude가, 사이트에서 읽은 개인 내용은 맥의 로컬 모델이 다룬다. 앱이 붙인 회의 자료의 내용은 `dialog_context`를 켠 경우에만 Claude로 가고, 그 밖에는 붙어 있다는 사실만 간다.
 - 구현: `src/agent/api/`. 실행: `.venv/bin/python -m agent.cli serve` (colima, Ollama 필요).
 
 ## 접속
@@ -380,7 +380,7 @@ S = {"v": 1, "can_undo": true, "updated_at": "2026-11-16T14:00:37+09:00",
 - **맥이 채우는 카드의 `state`**: `ok`(`data` 있음) · `stale`(15분이 지난 `data` — 보여 주되 새로 고침을 부른다) · `empty`(아직 채운 적 없음 — `refresh`를 부른다) · `unavailable`(채울 수 없다 — `why`를 카드에 보인다: "로그인이 필요해요", "메일 계정을 연결하면 보여요" 등. 값을 지어내 채우지 않는다). 카드의 내용은 맥 메모리에만 있어 서버가 다시 뜨면 `empty`다.
 - **블록 `data.blocks[]`**(4개까지, 위에서 아래): `{"kind": "text", "text"}` · `{"kind": "stat", "label", "value", "note"}`(큰 값 하나) · `{"kind": "list", "items": [{"title", "subtitle", "trailing"}]}`(6줄까지) · `{"kind": "progress", "label", "ratio": 0~1}`. **모르는 `kind`는 건너뛴다.** `mail_today`는 `blocks`(요약 글)와 함께 `count`·`services`·`items`(코드가 만든 목록 5줄까지)를 준다 — 전용 카드로 그려도 되고 블록만 그려도 된다.
 - 말로 만든 카드는 채울 때 그 말을 비서에게 건네 **바로 나온 답**만 블록으로 옮긴다(공개 정보 찾기, 메일 등). 사이트에 들어가야 하는 일·로그인·승인이 필요한 일은 채우지 않고 `unavailable`로 둔다. 답에 없는 숫자가 든 블록은 맥이 버린다.
-- 앱 권장 흐름: 탭을 열면 `GET /v1/space` → `cards`가 비었으면 빈 화면(예시 문장) → 입력은 `POST /v1/space/edit` → 응답의 `changes`를 보여 주고 화면을 바꾼다 → `state`가 `empty`·`stale`인 카드는 `POST /v1/space/refresh {"card": id}`. 화면 시안: https://claude.ai/artifact/QgH55RURKFFW96p4C62sWZ (사용자 소유, 비공개).
+- 앱 권장 흐름: 탭을 열면 `GET /v1/space` → `cards`가 비었으면 빈 화면(예시 문장) → 입력은 `POST /v1/space/edit` → 응답의 `changes`를 보여 주고 화면을 바꾼다 → `state`가 `empty`·`stale`인 카드는 `POST /v1/space/refresh {"card": id}`. 화면 시안은 저장소 밖에 따로 두었다.
 
 ### 손 넘기기 (D106, features `handover`)
 사람이 해야 하는 단계(사람 확인 퍼즐 등)를 만나면 작업이 질문 카드로 멈춘다: `status: "awaiting_input"`, `question.choices: ["다 했어요", "그만하기"]`, 그리고
@@ -831,8 +831,8 @@ S = {"v": 1, "can_undo": true, "updated_at": "2026-11-16T14:00:37+09:00",
   - 되묻기(`action.type: "ask"`)의 `choices`가 **6개까지**. `multi: true`(있을 때만)면 여러 개를 함께 고른다 — 앱은 고른 것들을 ", "로 이어 한 말로 보낸다. `choice_details`(있을 때만): `[{"text", "image"?}]` — `choices`와 같은 순서, `image`는 이 대화에서 맥이 실제로 연 공개 페이지의 대표 그림(https)만. 없는 줄은 `image`가 없다.
   - 답 뒤의 **다음 말**: 말풍선으로 답한 응답의 `action`(`type: "none"`)에 `next: {"choices": [2~3개], "recommended"?}`(있을 때만). 고르면 그 글을 사용자가 보낸 말처럼 보내면 된다. 대개는 없다(잡담·짧은 답에는 붙이지 않는다).
   - 답변 카드에도 `card.next: {"choices": [...]}`(있을 때만) — 같은 방식.
-- 2026-11-16 (사용자 지시 "답변 카드를 참고 앱처럼 일정하게", 시안 https://claude.ai/artifact/YNmTyyMbLv1Xx7tbh2rbT8 — 사용자 소유·비공개): **답변 카드**.
-  - 끝난 작업(`completed`·`failed`·`needs_input`)의 `result.report.card`: `{"kind": "answer"|"result"|"failed", "title", "subtitle"?, "blocks"?, "actions": [...]}`. `answer`는 읽어 온 결과(제목 "최근 결제 내역" + 블록), `result`는 무언가 한 뒤(제목 "장바구니에 담았어요" + 부제 + 블록), `failed`는 한 줄 까닭(`title`) + 단추. `blocks`는 내 공간과 같은 블록(`text`·`stat`·`list`·`pairs`·`date`, 3개까지, 목록은 하나). `actions`는 맥의 코드가 정한 것만: `{"label": "쿠팡에서 보기", "url"}` 또는 `{"label": "다시 로그인", "site"}`. 카드가 있으면 `report.done`의 줄글 대신 카드를 그리면 된다(카드를 못 만들었으면 오지 않는다 — 그때는 예전처럼 `done`). 맥에서만 읽은 결과(정해진 사이트 읽기)는 맥의 로컬 모델이 다듬어 30초쯤 더 걸린다.
+- 2026-11-16 (사용자 지시 "답변 카드를 참고 앱처럼 일정하게"): **답변 카드**.
+  - 끝난 작업(`completed`·`failed`·`needs_input`)의 `result.report.card`: `{"kind": "answer"|"result"|"failed", "title", "subtitle"?, "blocks"?, "actions": [...]}`. `answer`는 읽어 온 결과(제목 "최근 결제 내역" + 블록), `result`는 무언가 한 뒤(제목 "장바구니에 담았어요" + 부제 + 블록), `failed`는 한 줄 까닭(`title`) + 단추. `blocks`는 내 공간과 같은 블록(`text`·`stat`·`list`·`pairs`·`date`, 3개까지, 목록은 하나). `actions`는 맥의 코드가 정한 것만: `{"label": "사이트에서 보기", "url"}` 또는 `{"label": "다시 로그인", "site"}`. 카드가 있으면 `report.done`의 줄글 대신 카드를 그리면 된다(카드를 못 만들었으면 오지 않는다 — 그때는 예전처럼 `done`). 맥에서만 읽은 결과(정해진 사이트 읽기)는 맥의 로컬 모델이 다듬어 30초쯤 더 걸린다.
   - 되묻기의 `action`에 `recommended`(권하는 후보 — `choices` 가운데 하나, 있을 때만): 고르기 카드에서 '추천' 표시.
   - 말풍선 `replies[]`에 `kind: "status"`가 붙으면 한 줄로 끝난 일(예약했어요 · 매일 오전 8:00, 내 공간을 고친 것): 말풍선 대신 작은 상태 줄로.
 - 2026-11-16 (사용자 지시 "과하게 들어간 문장·표기는 빼라"): 공개 정보 웹 검색의 답에서 **"출처: …"·"찾아본 곳: …" 말풍선이 없어지고**, 응답 맨 위의 `sources`(사이트 이름 배열, 있을 때만)로 온다 — 앱이 작은 글씨로 그리거나 빼면 된다. 예약을 만든 답은 "예약했어요. 매일 오전 8:00" 한 줄(주의 문구 없음). 로그인한 사이트 안에서 한 일의 답에 "길: A > B > C"·하지 않은 일·캡처 얘기를 쓰지 않는다.

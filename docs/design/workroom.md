@@ -69,7 +69,7 @@ flowchart LR
 | 날짜 | 무엇 | 결과 |
 |---|---|---|
 | 2026-11-17 | 이미지 `local-ai-agent/workroom` | python 3.12 slim + ffmpeg + 나눔·Noto CJK + pillow·numpy·matplotlib·requests, 0.2에서 Chromium 추가(1.88GB) |
-| 2026-11-17 | 격리 시험 `RUN_INTEGRATION=1 pytest tests/integration/test_workroom.py` | 7/7 — uid 1100·CapEff 0·읽기 전용, 환경 변수·마운트에 비밀 없음, 직접 나가기 실패(ENETUNREACH), 프록시가 `host.docker.internal:8765`·192.168.5.2·192.168.0.1·10.0.0.1·100.100.100.100·127.0.0.1·localhost·169.254.169.254·비표준 포트를 막고 공인 https(example.com)는 200, 2초 상한·2GB 메모리·출력 자르기 |
+| 2026-11-17 | 격리 시험 `RUN_INTEGRATION=1 pytest tests/integration/test_workroom.py` | 7/7 — uid 1100·CapEff 0·읽기 전용, 환경 변수·마운트에 비밀 없음, 직접 나가기 실패(ENETUNREACH), 프록시가 `host.docker.internal:8765`·192.168.1.1·192.168.0.1·10.0.0.1·100.100.100.100·127.0.0.1·localhost·169.254.169.254·비표준 포트를 막고 공인 https(example.com)는 200, 2초 상한·2GB 메모리·출력 자르기 |
 | 2026-11-17 | 화면 시안(D104) | `shot`으로 HTML → 1170×2532 PNG. 붙인 화면을 보고 시안 2개 41초·$0.11 → 이어서 고치기 23초·$0.05 |
 | 2026-11-19 | **문서 과제** `scripts/bench_workroom.py --task doc` (claude-sonnet-5-5) | completed, 10걸음(실패 1 — 스스로 고침), **55초, $0.12**. 가상 자료(카페 3곳 × 4주)로 A4 1쪽 PDF — 결론 3줄·주별 표(합계 행)·선 그래프. 합계·증가율·순위는 코드로 계산, 표·결론의 숫자 모두 자료와 일치(사람이 다시 계산해 확인). 그래프의 숫자 라벨 겹침을 스스로 세 번 고침 |
 

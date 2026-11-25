@@ -79,7 +79,7 @@ $EDITOR .env                         # ANTHROPIC_API_KEY 또는 로컬 모델 �
 
 | 영역 | 하는 일 | 검증 결과 |
 |---|---|---|
-| **사이트 작업** | 로그인된 사이트에서 읽기·실행, 바꾸는 버튼은 폰 승인 카드 | 합성 69 / 70 |
+| **사이트 작업** | 로그인된 사이트에서 읽기·실행, 바꾸는 버튼은 폰 승인 카드 | 합성 68 / 70 |
 | **손 넘기기** | 캡차·2단계 인증 시 멈추고 아이폰으로 실시간 조작 화면 전달 | 실기기 확인 |
 | **기억** | 사용자 요약본(`md`) 유지 + 지난 대화 검색 | 합성 11 / 11 |
 | **회의 → 실행** | 기기 내 음성 인식으로 요약 후 메일 초안·미리알림으로 연결 | 실기기 확인 |
@@ -92,7 +92,7 @@ $EDITOR .env                         # ANTHROPIC_API_KEY 또는 로컬 모델 �
 |:---:|:---:|:---:|:---:|:---:|
 | <img src="docs/img/app/01-record.png" width="160"> | <img src="docs/img/app/02-summary.png" width="160"> | <img src="docs/img/app/03-todos.png" width="160"> | <img src="docs/img/app/04-draft-approval.png" width="160"> | <img src="docs/img/app/05-space.png" width="160"> |
 
-- 공개 사이트 직접 조작: 쉬운 10/10 · 복잡한 9/10
+- 공개 사이트 직접 조작: 쉬운 10/10 · 어려운 5/10 · 복잡한 화면(합성) 13/14
 - 대화 판단 정확도: 84/84
 - 작업실 A4 보고서 PDF 생성: 55초 · $0.12
 - 전체 측정 조건과 실패 기록은 [docs/EVALUATION.md](docs/EVALUATION.md)에 있습니다.

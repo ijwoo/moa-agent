@@ -79,7 +79,7 @@ $EDITOR .env                         # Add ANTHROPIC_API_KEY and/or enable local
 
 | Area | What it does | Verified |
 |---|---|---|
-| **Browser Tasks** | Reads and acts inside logged-in sites; irreversible clicks require phone approval | 69 / 70 synthetic tasks |
+| **Browser Tasks** | Reads and acts inside logged-in sites; irreversible clicks require phone approval | 68 / 70 synthetic tasks |
 | **Live Handover** | Pauses at CAPTCHA / 2FA and streams the interactive view to iPhone | Real device |
 | **Memory** | Maintains user summary (`md`) + searchable episode history | 11 / 11 synthetic |
 | **Meeting -> Action** | Turns on-device meeting transcripts into drafts, reminders, and follow-ups | Real device |
@@ -92,7 +92,7 @@ $EDITOR .env                         # Add ANTHROPIC_API_KEY and/or enable local
 |:---:|:---:|:---:|:---:|:---:|
 | <img src="docs/img/app/01-record.png" width="160"> | <img src="docs/img/app/02-summary.png" width="160"> | <img src="docs/img/app/03-todos.png" width="160"> | <img src="docs/img/app/04-draft-approval.png" width="160"> | <img src="docs/img/app/05-space.png" width="160"> |
 
-- Public site automation: `10/10` (standard), `9/10` (complex)
+- Public site automation: `10/10` (standard), `5/10` (hard sites), `13/14` (complex synthetic screens)
 - Planner routing accuracy: `84/84`
 - Workroom PDF report generation: `55s · $0.12`
 - See [docs/EVALUATION.md](docs/EVALUATION.md) for full methodology and failure logs.

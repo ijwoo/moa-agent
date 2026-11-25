@@ -6,6 +6,8 @@ __pycache__/
 .pytest_cache/
 # 비밀 정보
 .env
+.env.*
+!.env.example
 *.pem
 *.key
 # 실행 산출물

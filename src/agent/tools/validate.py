@@ -101,7 +101,7 @@ class Policy:
 
 
 def is_search_box(element) -> bool:
-    """검색창인가: 역할이 searchbox이거나, 글 칸의 이름에 '검색'·search가 든다(실기기 2026-11-16: 쿠팡의 상품 검색 칸이
+    """검색창인가: 역할이 searchbox이거나, 글 칸의 이름에 '검색'·search가 든다(실기기 2026-11-16: 한 쇼핑몰의 상품 검색 칸이
     textbox로 읽혀 Enter에 승인 카드가 떴다 — 검색은 아무것도 바꾸지 않는다)."""
     if element.role == "searchbox":
         return True

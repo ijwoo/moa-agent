@@ -1454,7 +1454,7 @@ class SiteLoginManager:
                         time.sleep(self.poll_s)
                         continue
                     failed_msg = not away and bool(LOGIN_FAILED.search(whole))
-                    # 사이트가 실패를 알렸으면 묻기 전에 스스로 본다(D120, 실기기 2026-11-18 사람인: 실패 안내가 떠 있는데 "로그인이 끝났나요?"를 물었고,
+                    # 사이트가 실패를 알렸으면 묻기 전에 스스로 본다(D120, 실기기의 채용 사이트: 실패 안내가 떠 있는데 "로그인이 끝났나요?"를 물었고,
                     # 실제로는 로그인돼 있었다). 로그아웃이 보이고 로그인 칸·입구가 없으면 묻지 않고 확인으로 넘어간다
                     if failed_msg and any(w in whole.lower() for w in SIGNED_IN_WORDS) and self._still_in(b, site):
                         landed = self._landed(b, site)

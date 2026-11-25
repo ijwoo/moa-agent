@@ -51,7 +51,7 @@ def test_no_direct_way_out_and_the_gate_refuses_private_addresses(room):
     r = run(room, "python3 -c \"import socket;s=socket.socket();s.settimeout(4);print(s.connect_ex(('1.1.1.1',443)))\"")
     assert r.output.strip() != "0"                           # 내부망: 프록시를 거치지 않으면 나갈 수 없다
     probe = ("python3 - <<'E'\nimport requests\n"
-             "for u in ['http://host.docker.internal:8765/','https://192.168.5.2/','https://192.168.0.1/','https://10.0.0.1/',"
+             "for u in ['http://host.docker.internal:8765/','https://192.168.1.1/','https://192.168.0.1/','https://10.0.0.1/',"
              "'https://100.100.100.100/','https://127.0.0.1/','http://localhost/','https://169.254.169.254/','https://example.com:8443/']:\n"
              "  try: print('OPEN', u, requests.get(u, timeout=8).status_code)\n"
              "  except Exception as e: print('SHUT', u)\nE")

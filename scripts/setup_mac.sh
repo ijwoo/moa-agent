@@ -58,5 +58,5 @@ cat <<EOF
   .venv/bin/python -m agent.cli serve          # 127.0.0.1:8765
 맥에 로그인하면 스스로 뜨게:
   scripts/install_autostart.sh install
-폰(모아 앱)에서 붙으려면 같은 tailnet의 주소가 필요합니다(예: tailscale serve) — README의 "폰에서 붙기".
+폰(모아 앱)에서 붙으려면 같은 tailnet의 주소가 필요합니다(예: tailscale serve) — README의 "아이폰 연결"(영문 README는 "Connect your iPhone").
 EOF
